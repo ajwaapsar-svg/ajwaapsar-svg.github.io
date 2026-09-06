@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Setup - AdVibe</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Minimal page-specific styles to keep the form usable even if style.css is different */
+        .container {max-width:900px;margin:40px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.05);}
+        h1{margin-bottom:8px}
+        form .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        label{display:block;font-weight:600;margin-bottom:6px}
+        input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:15px}
+        .full{grid-column:1 / -1}
+        .section{margin-top:20px}
+        .actions{display:flex;gap:12px;align-items:center;margin-top:20px}
+        .btn{background:#2b6cb0;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;border:none;cursor:pointer}
+        .btn.secondary{background:#edf2f7;color:#2d3748}
+        .note{font-size:13px;color:#4a5568}
+        .error{color:#c53030;font-size:13px;margin-top:6px}
+        @media (max-width:700px){.grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo">AdVibe</h2>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Payment Setup</h1>
+    <p class="note">Complete your contact details and billing information to set up payments for your campaigns.</p>
+
+    <form id="paymentForm" novalidate>
+        <fieldset class="section">
+            <legend><strong>Contact Details</strong></legend>
+
+            <div class="grid">
+                <div>
+                    <label for="fullName">Full name</label>
+                    <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" required>
+                    <div class="error" id="err-fullName"></div>
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="jane@example.com" required>
+                    <div class="error" id="err-email"></div>
+                </div>
+
+                <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" placeholder="+1 555 555 5555">
+                    <div class="error" id="err-phone"></div>
+                </div>
+
+                <div>
+                    <label for="company">Company (optional)</label>
+                    <input id="company" name="company" type="text" placeholder="Your company name">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="section">
+            <legend><strong>Billing Address</strong></legend>
+
+            <div class="grid">
+                <div class="full">
+                    <label for="address">Street address</label>
+                    <input id="address" name="address" type="text" placeholder="123 Main St" required>
+                    <div class="error" id="err-address"></div>
+                </div>
+
+                <div>
+                    <label for="city">City</label>
+                    <input id="city" name="city" type="text" placeholder="City" required>
+                    <div class="error" id="err-city"></div>
+                </div>
+
+                <div>
+                    <label for="state">State / Region</label>
+                    <input id="state" name="state" type="text" placeholder="State">
+                </div>
+
+                <div>
+                    <label for="zip">ZIP / Postal code</label>
+                    <input id="zip" name="zip" type="text" placeholder="12345" required>
+                    <div class="error" id="err-zip"></div>
+                </div>
+
+                <div>
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="AU">Australia</option>
+                        <option value="IN">India</option>
+                        <!-- Add more as needed -->
+                    </select>
+                    <div class="error" id="err-country"></div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="section">
+            <legend><strong>Payment Method</strong></legend>
+
+            <div class="grid">
+                <div class="full">
+                    <label for="cardName">Cardholder name</label>
+                    <input id="cardName" name="cardName" type="text" placeholder="Jane Doe" required>
+                    <div class="error" id="err-cardName"></div>
+                </div>
+
+                <div>
+                    <label for="cardNumber">Card number</label>
+                    <input id="cardNumber" name="cardNumber" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" required maxlength="19">
+                    <div class="error" id="err-cardNumber"></div>
+                </div>
+
+                <div>
+                    <label for="expiry">Expiry (MM/YY)</label>
+                    <input id="expiry" name="expiry" type="text" placeholder="04/28" required maxlength="5">
+                    <div class="error" id="err-expiry"></div>
+                </div>
+
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input id="cvv" name="cvv" type="password" inputmode="numeric" placeholder="123" required maxlength="4">
+                    <div class="error" id="err-cvv"></div>
+                </div>
+
+                <div class="full">
+                    <label for="plan">Select plan</label>
+                    <select id="plan" name="plan">
+                        <option value="starter">Starter — $49/mo</option>
+                        <option value="growth">Growth — $149/mo</option>
+                        <option value="pro">Pro — $399/mo</option>
+                    </select>
+                </div>
+
+                <div class="full">
+                    <label><input type="checkbox" id="saveCard" name="saveCard"> Save card for future payments</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="actions">
+            <button type="submit" class="btn">Confirm & Set Up Payment</button>
+            <a href="contact.html" class="btn secondary">Back to Contact</a>
+            <p class="note">By confirming you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+        </div>
+
+    </form>
+
+    <div id="result" class="section" aria-live="polite"></div>
+</main>
+
+<footer>
+    <p>© 2026 Adx. All Rights Reserved.</p>
+</footer>
+
+<script>
+    // Minimal client-side validation + fake submit (do NOT use this for real card processing)
+    const form = document.getElementById('paymentForm');
+    const result = document.getElementById('result');
+
+    function setError(id, message){
+        document.getElementById('err-'+id).textContent = message || '';
+    }
+
+    function validate(){
+        let ok = true;
+        const requiredFields = ['fullName','email','address','city','zip','country','cardName','cardNumber','expiry','cvv'];
+        requiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if(!el) return;
+            if(!el.value.trim()){
+                setError(id, 'This field is required');
+                ok = false;
+            } else {
+                setError(id, '');
+            }
+        });
+
+        const email = document.getElementById('email').value;
+        if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+            setError('email','Enter a valid email address');
+            ok = false;
+        }
+
+        const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g,'');
+        if(cardNumber && !/^\d{13,19}$/.test(cardNumber)){
+            setError('cardNumber','Enter a valid card number');
+            ok = false;
+        }
+
+        const expiry = document.getElementById('expiry').value;
+        if(expiry && !/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)){
+            setError('expiry','Use MM/YY');
+            ok = false;
+        }
+
+        const cvv = document.getElementById('cvv').value;
+        if(cvv && !/^\d{3,4}$/.test(cvv)){
+            setError('cvv','Enter a valid 3 or 4 digit CVV');
+            ok = false;
+        }
+
+        return ok;
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        result.textContent = '';
+        if(!validate()){
+            result.innerHTML = '<p class="error">Please fix the errors above and try again.</p>';
+            return;
+        }
+
+        // Fake submit: show summary (in a real app send to backend / payment gateway)
+        const summary = {
+            name: form.fullName.value,
+            email: form.email.value,
+            plan: form.plan.value,
+            savedCard: form.saveCard.checked ? 'Yes' : 'No'
+        };
+
+        result.innerHTML = `<div class="container"><h3>Payment setup complete</h3>
+            <p class="note">Thanks, ${summary.name}. A confirmation has been sent to <strong>${summary.email}</strong>.</p>
+            <p>Selected plan: <strong>${summary.plan}</strong></p>
+            <p>Save card: <strong>${summary.savedCard}</strong></p>
+            <p class="note">(This demo page does not perform real payments. Integrate a secure gateway like Stripe or PayPal on the server to process cards.)</p>
+        </div>`;
+
+        // Optionally clear sensitive fields
+        document.getElementById('cardNumber').value = '';
+        document.getElementById('cvv').value = '';
+    });
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
